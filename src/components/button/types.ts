@@ -1,18 +1,18 @@
 import { AnchorHTMLAttributes } from "react";
 
-export type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>;
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
-export type SubmitButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
-export type LinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { to: string };
+export type _AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>;
+export type _ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type _SubmitButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type _LinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { to: string };
 
 /*********************************************************************************************
  * FINISHED BUTTON TYPES
  *********************************************************************************************/
 export type BaseProps<
-  TLinkProps = LinkProps,
-  TAnchorProps = AnchorProps,
-  TButtonProps = ButtonProps,
-  TSubmitButtonProps = SubmitButtonProps
+  TLinkProps = _LinkProps,
+  TAnchorProps = _AnchorProps,
+  TButtonProps = _ButtonProps,
+  TSubmitButtonProps = _SubmitButtonProps
 > = {
   /**
    * The content of the button.
@@ -39,7 +39,7 @@ export type BaseProps<
     | NoInfer<TSubmitButtonProps>;
 
   /**
-   * To maintain a router agnostic implementation, underlying attributes such as router specific "Link" tag can be provided a new, override element,
+   * To maintain a router agnostic implementation, underlying components such as router specific "Link" tag can be provided a new, override element,
    * such as "a" or "button".
    * 
    * This allows the button to be customized in any abstraction to render an alternative underlying component when necessary.
@@ -70,10 +70,10 @@ export type BaseProps<
 }
 
 export type OnClickProps<
-  TLinkProps = LinkProps,
-  TAnchorProps = AnchorProps,
-  TButtonProps = ButtonProps,
-  TSubmitButtonProps = SubmitButtonProps
+  TLinkProps = _LinkProps,
+  TAnchorProps = _AnchorProps,
+  TButtonProps = _ButtonProps,
+  TSubmitButtonProps = _SubmitButtonProps
 > = {
   onClick: () => void;
   type?: 'button' | 'reset'; 
@@ -88,10 +88,10 @@ export type OnClickProps<
 >
 
 export type SubmitProps<
-  TLinkProps = LinkProps,
-  TAnchorProps = AnchorProps,
-  TButtonProps = ButtonProps,
-  TSubmitButtonProps = SubmitButtonProps
+  TLinkProps = _LinkProps,
+  TAnchorProps = _AnchorProps,
+  TButtonProps = _ButtonProps,
+  TSubmitButtonProps = _SubmitButtonProps
 > = {
   type?: 'submit';
   intrinsic?: NoInfer<TSubmitButtonProps>
@@ -105,10 +105,10 @@ export type SubmitProps<
 >
 
 export type HrefProps<
-  TLinkProps = LinkProps,
-  TAnchorProps = AnchorProps,
-  TButtonProps = ButtonProps,
-  TSubmitButtonProps = SubmitButtonProps
+  TLinkProps = _LinkProps,
+  TAnchorProps = _AnchorProps,
+  TButtonProps = _ButtonProps,
+  TSubmitButtonProps = _SubmitButtonProps
 > = {
   href: string;
   intrinsic?: NoInfer<TAnchorProps>;
@@ -122,10 +122,10 @@ export type HrefProps<
 >
 
 export type ToProps<
-  TLinkProps = LinkProps,
-  TAnchorProps = AnchorProps,
-  TButtonProps = ButtonProps,
-  TSubmitButtonProps = SubmitButtonProps
+  TLinkProps = _LinkProps,
+  TAnchorProps = _AnchorProps,
+  TButtonProps = _ButtonProps,
+  TSubmitButtonProps = _SubmitButtonProps
 > = {
   to: string;
   intrinsic?: NoInfer<TLinkProps>;
@@ -139,10 +139,10 @@ export type ToProps<
 >
 
 export type GUI_ButtonProps<
-  TLinkProps = LinkProps,
-  TAnchorProps = AnchorProps,
-  TButtonProps = ButtonProps,
-  TSubmitButtonProps = SubmitButtonProps
+  TLinkProps = _LinkProps,
+  TAnchorProps = _AnchorProps,
+  TButtonProps = _ButtonProps,
+  TSubmitButtonProps = _SubmitButtonProps
 > =
   | OnClickProps<TLinkProps, TAnchorProps, TButtonProps, TSubmitButtonProps>
   | HrefProps<TLinkProps, TAnchorProps, TButtonProps, TSubmitButtonProps>

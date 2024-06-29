@@ -1,14 +1,14 @@
 import { AnchorHTMLAttributes } from "react";
-import { AnchorProps, BaseProps, ButtonProps, HrefProps, LinkProps, OnClickProps, Orient, ReturnedButton, SubmitButtonProps, SubmitProps, ToProps } from "./types";
+import { _AnchorProps, BaseProps, _ButtonProps, HrefProps, _LinkProps, OnClickProps, Orient, ReturnedButton, _SubmitButtonProps, SubmitProps, ToProps } from "./types";
 import classNames from "classnames";
-
+import { _Button } from "./_button";
 
 
 export const createButton = <
-  TLinkProps = LinkProps,
-  TAnchorProps = AnchorProps,
-  TButtonProps = ButtonProps,
-  TSubmitButtonProps = SubmitButtonProps,
+  TLinkProps = _LinkProps,
+  TAnchorProps = _AnchorProps,
+  TButtonProps = _ButtonProps,
+  TSubmitButtonProps = _SubmitButtonProps,
   TReturnType = ReturnedButton<TLinkProps, TAnchorProps, TButtonProps, TSubmitButtonProps>
 >({
   components,
@@ -52,28 +52,28 @@ export const createButton = <
   type _SubmitProps = SubmitProps<TLinkProps, TAnchorProps, TButtonProps, TSubmitButtonProps>
 
   const Button = (props: _OnClickProps) => (
-    <Button 
+    <_Button 
       {...props as any} 
       className={classNames(className, props.className)} 
       components={components} 
     />
   );
   const Link = (props: _ToProps) => (
-    <Button 
+    <_Button 
       {...props as any} 
       className={classNames(className, props.className)} 
       components={components} 
     />
   );
   const Anchor = (props: _HrefProps) => (
-    <Button 
+    <_Button 
       {...props as any} 
       className={classNames(className, props.className)} 
       components={components} 
     />
   );
   const Submit = (props: _SubmitProps) => (
-    <Button 
+    <_Button 
       {...props as any} 
       className={classNames(className, props.className)} 
       components={components} 
@@ -94,14 +94,22 @@ export const createButton = <
 
 }
 
-const BestAnchor = createButton({
+type TExampleLinkProps = {
+  theBestProp: boolean;
+  intrinsic?: AnchorHTMLAttributes<HTMLAnchorElement>
+};
+
+export const CustomButton = createButton({
   className: "MyButton",
   components: {
-    link: (props: { gay: boolean } & AnchorHTMLAttributes<HTMLAnchorElement>) => <a {...props} />,
+    link: ({ intrinsic }: TExampleLinkProps) => <a {...intrinsic} />,
   },
-  orient: ({ Button, Anchor, Link, Submit }) => Object.assign(Anchor, {
-    Button,
+  orient: ({ Button, Anchor, Link, Submit }) => Object.assign(Button, {
+    Anchor,
     Link,
     Submit
   }),
 });
+
+
+
