@@ -80,32 +80,35 @@ export const _Button: React.FC<GUI_ButtonProps> = ({
     "aria-disabled": disabled 
   }
 
+  const createClassName = (className: string): string => {
+    return classNames("GUI__Button", className, _className)
+  }
+
+  const createProps = <P,>(props: any, className: string): P => {
+    return {
+      ...props,
+      ...baseProps,
+      className: createClassName(className)
+    }
+  }
+
   /***** RENDER *****/
   switch (true) {
     case "href" in props: {
-      const { href, intrinsic } = props
-      const className = classNames("GUI__Button", "GUI__Button--link", _className)
-      return createElement(anchor, { href, className, ...baseProps, ...intrinsic }, children);
+      return createElement(anchor, createProps<NButton.HrefProps>(props, "GUI__Button--link"), children);
     }
     case "onClick" in props: {
-      const { onClick, type, intrinsic } = props
-      const className = classNames("GUI__Button", "GUI__Button--button", _className)
-      return createElement(button, { onClick, type, disabled, className, ...baseProps, ...intrinsic }, children);
+      return createElement(button, createProps<NButton.OnClickProps>(props, "GUI__Button--button"), children);
     }
     case "type" in props && props.type === 'submit': {
-      const { type, intrinsic } = props;
-      const className = classNames("GUI__Button", "GUI__Button--submit", _className)
-      return createElement(submitButton, { type, disabled, className, ...baseProps, ...intrinsic }, children);
+      return createElement(submitButton, createProps<NButton.SubmitProps>(props, "GUI__Button--submit"), children);
     }
     case "to" in props: {
-      const { to, intrinsic } = props
-      const className = classNames("GUI__Button", "GUI__Button--link", _className)
-
       if (link === 'a') {
-        return createElement(anchor, { href: to, className, ...baseProps, ...intrinsic }, children);
+        return createElement(anchor, createProps<NButton.HrefProps>({ ...props, href: props.to }, "GUI__Button--link"), children);
       }
 
-      return createElement(link, { to, className, ...baseProps, ...intrinsic }, children);
+      return createElement(link, createProps<NButton.ToProps>(props, "GUI__Button--link"), children);
     }
     default: {
       return null
